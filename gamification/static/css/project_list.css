@@ -1,0 +1,41 @@
+div.row {
+    margin-left: 0px;
+}
+.badge-row.leader {
+    padding: 0px; line-height: 1em;
+}
+.badge-row.leader img{
+    padding: 0px;width: 24px;vertical-align: baseline;
+}
+
+.badge-row {
+    padding:5px; border:1px solid gray
+}
+.badge-row h4 {
+    margin: 0px 0px 5px 0px;
+}
+.badge-row:nth-child(even) {
+    background-color: lightcyan;
+}
+.badge-row:nth-child(odd) {
+    background-color: lightyellow;
+}
+.badge-row span.dtg {
+    display: inline; padding: 0px;
+}
+.badge-row span.awardee {
+    display: inline; padding: 0px; width: 150px;
+}
+.badge-row span {
+    display: inline-block; vertical-align: top; padding:10px;
+}
+#header_title h1{
+    margin:0px;
+}
+#header_title {
+    margin-bottom: 20px;
+}
+.tab-content{
+    max-height: 650px;
+    overflow: scroll;
+}

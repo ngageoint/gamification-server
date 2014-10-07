@@ -1,0 +1,61 @@
+{% extends "core/base.html" %}
+{% load staticfiles %}
+{% block content %}
+{% block heading %}
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-2">
+        <div class="page-header">
+            <h2>Badges for project {{ project_name }}</h2>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Icon</th>
+                    <th>Description</th>
+                    <th>Points Worth</th>
+                    <th>Can win Multiple?</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for badge in object_list %}
+                <tr>
+                    <td>
+                        {{ badge.name }}
+                    </td>
+                    <td>
+                        {% with badge_icon=badge.badge__icon %}
+                        {% static badge_icon as badge_url %}
+                        <img src="{{ badge_url }}">
+                        {% endwith %}
+                    </td>
+                    <td>
+                        {{ badge.description }}
+                    </td>
+                    <td>
+                        {{ badge.awardLevel }}
+                    </td>
+                    <td>
+                        {{ badge.multipleAwards }}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+

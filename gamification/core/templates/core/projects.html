@@ -1,0 +1,90 @@
+{% extends "core/base.html" %}
+{% block title %}Gamification Projects{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Project Description</th>
+                    <th>Created</th>
+                    <th>Leaderboard</th>
+                    <th>Badges Given</th>
+                    <th>Badge Recipients</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for project in active_projects %}
+                <tr>
+                    <td>
+                        <a href='{{ project.get_absolute_url }}'>{{ project.name|title }}</a>
+                    </td>
+                    <td>
+                        {{ project.description }}
+                    </td>
+                    <td>
+                        {{ project.created_at|date:"SHORT_DATE_FORMAT" }}
+                    </td>
+                    <td>
+                        <a class="btn" href="{{ project.get_absolute_url }}"><i class="icon-list"></i></a>
+                    </td>
+                    <td>
+                        {{ project.badge_count }}
+                    </td>
+                    <td>
+                        {{ project.user_count }}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        <hr/>
+
+        {% if non_active_projects %}
+
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Inactive Project</th>
+                    <th>Project Description</th>
+                    <th>Created</th>
+                    <th>Badges Given</th>
+                    <th>Badge Recipients</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for project in non_active_projects %}
+                <tr>
+                    <td>
+                        <a href='{{ project.get_absolute_url }}'>{{ project.name|title }}</a>
+                    </td>
+                    <td>
+                        {{ project.description }}
+                    </td>
+                    <td>
+                        {{ project.created_at|date:"SHORT_DATE_FORMAT" }}
+                    </td>
+                    <td>
+                        {{ project.badge_count }}
+                    </td>
+                    <td>
+                        {{ project.user_count }}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        {% endif %}
+
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+

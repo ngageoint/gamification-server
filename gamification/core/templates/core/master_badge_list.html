@@ -1,0 +1,60 @@
+{% extends "core/base.html" %}
+{% load staticfiles %}
+{% block title %}Badges by project{% endblock %}
+{% block content %}
+{% block heading %}
+
+{% endblock %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+        {% regroup object_list by project__name as projects %}
+
+        {% for project in projects %}
+
+            <h2>Project: <a href='/projects/{{ project.grouper }}'>{{ project.grouper|capfirst }}</a></h2>
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Icon</th>
+                    <th>Description</th>
+                    <th>Tags</th>
+                    <th>Points</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for badge in project.list %}
+                <tr>
+                    <td>
+                        {{ badge.name }}
+                    </td>
+                    <td>
+                        {% with badge_icon=badge.badge__icon %}
+                        {% static badge_icon as badge_url %}
+                        <img src="{{ badge_url }}" style="max-width: 90px">
+                        {% endwith %}
+                    </td>
+                    <td>
+                        {{ badge.description }}
+                    </td>
+                    <td>
+                        {{ badge.tags }}
+                    </td>
+                    <td>
+                        {{ badge.awardLevel }}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+

@@ -1,0 +1,62 @@
+[
+{
+    "pk": 1, 
+    "model": "events.policy", 
+    "fields": {
+        "project": 3, 
+        "type": 0, 
+        "projectbadge": 6, 
+        "rule": "from gamification.events.models import Event\nrule 'Rule 1':\n\twhen:\n\t\t$event := Event(('event_type' in details_map) and ('aoi_complete' == details_map['event_type']) and ('aoi_id' in details_map) and (is_current_event) and (details_map['feature_count'] > 0))\n\tthen:\n\t\t$event.update_state('aoi_complete', $event.details_map['aoi_id'], $event.event_dtg)\n"
+    }
+},
+{
+    "pk": 2, 
+    "model": "events.policy", 
+    "fields": {
+        "project": 3, 
+        "type": 1, 
+        "projectbadge": 6, 
+        "rule": "from gamification.events.state import State\nrule 'Rule 1':\n\twhen:\n\t\t$state := State(('aoi_complete' in event_data) and (len(event_data['aoi_complete']) > 0))\n\tthen:\n\t\t$state.award($state.user, $state.project)\n"
+    }
+},
+{
+    "pk": 3, 
+    "model": "events.policy", 
+    "fields": {
+        "project": 3, 
+        "type": 0, 
+        "projectbadge": 5, 
+        "rule": "from gamification.events.models import Event\nrule 'Rule 1':\n\twhen:\n\t\t$event := Event(('event_type' in details_map) and ('aoi_complete' in details_map['event_type']) and ('aoi_id' in details_map) and (details_map['feature_count'] > 0))\n\tthen:\n\t\t$event.update_state('aoi_complete', $event.details_map['aoi_id'], $event.event_dtg)\n"
+    }
+},
+{
+    "pk": 4, 
+    "model": "events.policy", 
+    "fields": {
+        "project": 3, 
+        "type": 1, 
+        "projectbadge": 5, 
+        "rule": "from gamification.events.state import State\nrule 'Rule 1':\n\twhen:\n\t\t$state := State(('aoi_complete' in event_data) and (len(event_data['aoi_complete']) % 3 == 0))\n\tthen:\n\t\t$state.award($state.user, $state.project)\n"
+    }
+},
+{
+    "pk": 9, 
+    "model": "events.policy", 
+    "fields": {
+        "project": 4, 
+        "type": 0, 
+        "projectbadge": 7, 
+        "rule": "from gamification.events.models import Event\nrule 'Rule 1':\n\twhen:\n\t\t$event := Event(('event_type' in details_map) and (is_current_event))\n\tthen:\n\t\t$event.update_state('action_complete',$event.details_map['event_type'],$event.event_dtg)\n"
+    }
+},
+{
+    "pk": 10, 
+    "model": "events.policy", 
+    "fields": {
+        "project": 4, 
+        "type": 1, 
+        "projectbadge": 7, 
+        "rule": "from gamification.events.state import State\nrule 'Rule 1':\n\twhen:\n\t\t$state := State(('action_complete' in event_data))\n\tthen:\n\t\t$state.award($state.user,$state.project)\n"
+    }
+}
+]

@@ -1,0 +1,57 @@
+{% extends "core/base.html" %}
+{% block content %}
+{% block heading %}
+
+<div class="row">
+    <div class="col-md-6 col-md-offset-2">
+        <div class="page-header">
+            <h2>System Users</h2>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Last Name</th>
+                    <th>First Name</th>
+                    <th>Login</th>
+                    <th>Email</th>
+                    <th>Points</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for user in object_list %}
+                <tr>
+                    <td>
+                        {{ user.last_name }}
+                    </td>
+                    <td>
+                        {{ user.first_name }}
+                    </td>
+                    <td>
+                        {{ user.username }}
+                    </td>
+                    <td>
+                        {{ user.email }}
+                    </td>
+                    <td>
+                        <a class="btn" href="/users/{{ user.username }}/points"><i class="icon-list"></i></a>
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
+
+
+

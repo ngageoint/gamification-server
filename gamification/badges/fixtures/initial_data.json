@@ -1,0 +1,81 @@
+[
+{
+    "pk": 1, 
+    "model": "badges.badge", 
+    "fields": {
+        "icon": "img/bronze.png", 
+        "name": "Bronze", 
+        "level": "1"
+    }
+},
+{
+    "pk": 2, 
+    "model": "badges.badge", 
+    "fields": {
+        "icon": "img/silver.png", 
+        "name": "Silver", 
+        "level": "2"
+    }
+},
+{
+    "pk": 3, 
+    "model": "badges.badge", 
+    "fields": {
+        "icon": "img/gold.png", 
+        "name": "Gold", 
+        "level": "3"
+    }
+},
+{
+    "pk": 4, 
+    "model": "badges.projectbadge", 
+    "fields": {
+        "multipleAwards": true, 
+        "name": "Gold", 
+        "created": "2013-12-12T17:58:15.381Z", 
+        "project": 3, 
+        "awardLevel": 10,
+        "badge": 3, 
+        "description": "Gold badge"
+    }
+},
+{
+    "pk": 5, 
+    "model": "badges.projectbadge", 
+    "fields": {
+        "multipleAwards": true, 
+        "name": "Silver", 
+        "created": "2013-12-12T17:58:35.170Z", 
+        "project": 3, 
+        "awardLevel": 5,
+        "badge": 2, 
+        "description": "Silver award"
+    }
+},
+{
+    "pk": 6, 
+    "model": "badges.projectbadge", 
+    "fields": {
+        "multipleAwards": true, 
+        "name": "Bronze", 
+        "created": "2013-12-12T19:24:48.592Z", 
+        "project": 3, 
+        "awardLevel": 1,
+        "badge": 1, 
+        "description": "Bronze award"
+    }
+},
+{
+    "pk": 7, 
+    "model": "badges.projectbadge", 
+    "fields": {
+        "multipleAwards": true, 
+        "name": "contributer", 
+        "created": "2014-05-05T17:33:06.034Z", 
+        "project": 4, 
+        "awardLevel": 1,
+        "badge": 1, 
+        "description": "Contributer to NGA Connect"
+    }
+}
+]

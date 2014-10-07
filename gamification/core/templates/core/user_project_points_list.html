@@ -1,0 +1,64 @@
+{% extends 'core/base.html' %}
+
+{% block heading %}
+
+{% endblock %}
+
+
+{% block content %}
+<div class="row">
+    <div class="col-md-6 col-md-offset-2">
+        <div class="page-header">
+            <h2>Points for {{ username }} on project {{ projectname }}</h2>
+        </div>
+    </div>
+</div>
+{% for badge in projectbadges %}
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Award Name</th>
+                    <th>Points Received</th>
+                    <th>Date</th>
+                    <th>Comment</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for award in badge.awarded %}
+                <tr>
+                    <td>
+                        {{ badge.name }}
+                    </td>
+                    <td>
+                        {{ award.value }}
+                    </td>
+                    <td>
+                        {{ award.date_awarded|date:"SHORT_DATE_FORMAT" }} at {{ award.date_awarded|time:"H:i" }}
+                    </td>
+                    <td>
+                        {{ award.description }}
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4 col-md-offset-1">
+            <h3>Total Points: {{ badge.total }}</h3>
+        </div>
+    </div>
+</div>
+        <hr>
+
+{% endfor %}
+
+{% endblock %}
+
+
+

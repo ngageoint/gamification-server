@@ -1,0 +1,26 @@
+[
+{
+    "pk": 3, 
+    "model": "core.project", 
+    "fields": {
+        "name": "geoq", 
+        "created_at": "2013-12-12T17:57:23.228Z", 
+        "updated_at": "2013-12-12T17:57:23.228Z", 
+        "private": false, 
+        "active": true, 
+        "description": "GeoQ on Django"
+    }
+},
+{
+    "pk": 4, 
+    "model": "core.project", 
+    "fields": {
+        "name": "ngaconnect", 
+        "created_at": "2014-04-01T18:48:38.278Z", 
+        "updated_at": "2014-04-01T18:48:38.278Z", 
+        "private": false, 
+        "active": true, 
+        "description": "NGA Connect project"
+    }
+}
+]

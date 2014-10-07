@@ -1,0 +1,13 @@
+body {
+    background-color: rgba(255,255,255,0.8);
+    padding: 20px 20px 40px 20px;
+    border-radius: 50px;
+}
+
+html {
+    background: url(page_background.jpg) no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}

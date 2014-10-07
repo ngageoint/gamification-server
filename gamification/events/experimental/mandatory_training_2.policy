@@ -1,0 +1,22 @@
+from datetime import datetime
+from state import DemoState
+	
+rule "Rule 1":
+	when:
+		$state := DemoState((project.name == 'training') and ('course_complete' in event_data) and ('008031' in event_data['course_complete']) and (event_data['course_complete']['008031'] < datetime(2015, 1, 1)) and ('008189' in event_data['course_complete']) and (event_data['course_complete']['008189'] < datetime(2015, 1, 1)) and ('008582' in event_data['course_complete']) and (event_data['course_complete']['008582'] < datetime(2015, 1, 1)) and ('009446' in event_data['course_complete']) and (event_data['course_complete']['009446'] < datetime(2015, 1, 1)) and ('013413' in event_data['course_complete']) and (event_data['course_complete']['013413'] < datetime(2015, 1, 1)) and ('013567' in event_data['course_complete']) and (event_data['course_complete']['013567'] < datetime(2015, 1, 1)) and ('016003' in event_data['course_complete']) and (event_data['course_complete']['016003'] < datetime(2015, 1, 1)) and ('016094' in event_data['course_complete']) and (event_data['course_complete']['016094'] < datetime(2015, 1, 1)) and ('017724' in event_data['course_complete']) and (event_data['course_complete']['017724'] < datetime(2015, 1, 1)) and ('020146' in event_data['course_complete']) and (event_data['course_complete']['020146'] < datetime(2015, 1, 1)) and ('023416' in event_data['course_complete']) and (event_data['course_complete']['023416'] < datetime(2015, 1, 1)))
+	then:
+		$state.award($state.user, $state.project, 'Gold')
+		halt
+		
+rule "Rule 2":
+	when:
+		$state := DemoState((project.name == 'training') and ('course_complete' in event_data) and ('008031' in event_data['course_complete']) and (event_data['course_complete']['008031'] <= datetime(2015, 1, 1)) and ('008189' in event_data['course_complete']) and (event_data['course_complete']['008189'] <= datetime(2015, 1, 1)) and ('008582' in event_data['course_complete']) and (event_data['course_complete']['008582'] <= datetime(2015, 1, 1)) and ('009446' in event_data['course_complete']) and (event_data['course_complete']['009446'] <= datetime(2015, 1, 1)) and ('013413' in event_data['course_complete']) and (event_data['course_complete']['013413'] <= datetime(2015, 1, 1)) and ('013567' in event_data['course_complete']) and (event_data['course_complete']['013567'] <= datetime(2015, 1, 1)) and ('016003' in event_data['course_complete']) and (event_data['course_complete']['016003'] <= datetime(2015, 1, 1)) and ('016094' in event_data['course_complete']) and (event_data['course_complete']['016094'] <= datetime(2015, 1, 1)) and ('017724' in event_data['course_complete']) and (event_data['course_complete']['017724'] <= datetime(2015, 1, 1)) and ('020146' in event_data['course_complete']) and (event_data['course_complete']['020146'] <= datetime(2015, 1, 1)) and ('023416' in event_data['course_complete']) and (event_data['course_complete']['023416'] <= datetime(2015, 1, 1)))
+	then:
+		$state.award($state.user, $state.project, 'Silver')
+		halt
+		
+rule "Rule 3":
+	when:
+		$state := DemoState((project.name == 'training') and ('course_complete' in event_data) and ('008031' in event_data['course_complete']) and (event_data['course_complete']['008031'] >= datetime(2015, 1, 1)) and ('008189' in event_data['course_complete']) and (event_data['course_complete']['008189'] >= datetime(2015, 1, 1)) and ('008582' in event_data['course_complete']) and (event_data['course_complete']['008582'] >= datetime(2015, 1, 1)) and ('009446' in event_data['course_complete']) and (event_data['course_complete']['009446'] >= datetime(2015, 1, 1)) and ('013413' in event_data['course_complete']) and (event_data['course_complete']['013413'] >= datetime(2015, 1, 1)) and ('013567' in event_data['course_complete']) and (event_data['course_complete']['013567'] >= datetime(2015, 1, 1)) and ('016003' in event_data['course_complete']) and (event_data['course_complete']['016003'] >= datetime(2015, 1, 1)) and ('016094' in event_data['course_complete']) and (event_data['course_complete']['016094'] >= datetime(2015, 1, 1)) and ('017724' in event_data['course_complete']) and (event_data['course_complete']['017724'] >= datetime(2015, 1, 1)) and ('020146' in event_data['course_complete']) and (event_data['course_complete']['020146'] >= datetime(2015, 1, 1)) and ('023416' in event_data['course_complete']) and (event_data['course_complete']['023416'] >= datetime(2015, 1, 1)))
+	then:
+		$state.award($state.user, $state.project, 'Bronze')

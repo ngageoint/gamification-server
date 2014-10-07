@@ -1,0 +1,41 @@
+{% extends "core/base.html" %}
+{% block title %}Gamification Server{% endblock %}
+{% load staticfiles %}
+{% block content %}
+
+<div class="row">
+    <div class="col-lg-10">
+        <div class="jumbotron">
+            <h1>Gamification Server</h1>
+            <p>The Gamification Server is a management tool that allows other web pages, apps, or tools to
+                utilize "<a href="http://en.wikipedia.org/wiki/Gamification" target=_new">Gamification</a>" concepts.  These ideas
+                have been found to help engage with some users and encourage teamwork.</p>
+
+            <p>Gamification-server provides a framework for providing awards to users or teams and can be operated either
+                standalone or integrated with other web-based applications. Based on the notion of badges used within other
+                gamification systems, gamification-server also provides a customizable web interface for displaying badges as
+                well as a configurable rules engine to translate actions performed by users into awards. User awards can be
+                exported into an Open Badges Backpack, allowing users to present expertise gained within other social
+                frameworks or applications. The gamification-server is implemented as a django python web service and
+                associated web application.</p>
+
+            <p>The source code for this server is Open Source and currently available on <a href="https://github.com/ngageoint/gamification-server" target="_new">GitHub</a>
+                and available for anyone to use and improve upon. <b>We encourage your participation and want to hear your ideas!</b>
+                This is a prototype concept used to integrate tools and test out concepts. Interfaces are available either
+                through this web interface or through a REST-based API calls.
+            </p>
+        </div>
+
+        <div>
+            <h4>Some of the Badges in various projects</h4>
+            {% for badge in object_list %}
+                {% with badge_icon=badge.badge__icon %}
+                {% static badge_icon as badge_url %}
+                <img src="{{ badge_url }}" style="max-width: 90px" title="{{ badge.name }}">
+                {% endwith %}
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+{% endblock %}

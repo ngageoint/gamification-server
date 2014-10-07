@@ -1,0 +1,53 @@
+{% extends "core/base.html" %}
+
+{% block heading %}
+
+<h1>Project Leaders</h1>
+
+{% endblock %}
+
+
+{% block content %}
+{% for project in profile %}
+<h3>{{ project.description }}</h3>
+{% for badge in project.badges %}
+<h5>{{ badge.description }}</h5>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Points Received</th>
+                    <th>Badges Awarded</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for winner in badge.winners %}
+                <tr>
+                    <td>
+                        {{ winner.user__username }}
+                    </td>
+                    <td>
+                        {{ winner.points_count }}
+                    </td>
+                    <td>
+                        TODO
+                    </td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+{% endfor %}
+<hr>
+{% endfor %}
+{% endblock %}
+
+
+

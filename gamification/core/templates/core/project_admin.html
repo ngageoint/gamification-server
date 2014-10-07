@@ -1,0 +1,111 @@
+{% extends 'core/base.html' %}
+
+{% block header_title %}
+    <div id="header_title">
+        <h1>Administer badges within: <a href='/projects/{{ project.name }}/'>{{ project.name|capfirst }}</a></h1>
+    </div>
+{% endblock %}
+
+{% block content %}
+
+    {% if project.visual_theme %}
+        <link rel="stylesheet" href="{{ STATIC_URL }}themes/{{ project.visual_theme }}/style.css">
+    {% endif %}
+
+    <style>
+        {%  if project.background_image %}
+        html {
+            background: url({{ STATIC_URL }}{{ project.background_image }}) no-repeat center center fixed;
+            -webkit-background-size: cover;
+            -moz-background-size: cover;
+            -o-background-size: cover;
+            background-size: cover;
+        }
+        {% endif %}
+
+        #header_title h1{
+            margin:0px;
+        }
+        #header_title {
+            margin-bottom: 20px;
+        }
+    </style>
+
+    {% if admin %}
+
+    <script>
+        var project_info = {};
+        project_info.closing_date = '{{ project.project_closing_date|default:"" }}';
+        project_info.description = '{{ project.description|default:"" }}';
+        project_info.name = '{{ project.name|default:"" }}';
+        project_info.id = '{{ project.id }}';
+
+        $(document).ready(function(){
+            $('#create_user_button').click(function(){
+                var username = $('#username').val();
+                if (username) {
+                    document.location.href = '/users/'+username+'/create/';
+                }
+            });
+
+            $('#assign_badge_button').click(function(){
+                var username = $('#username_to').val();
+                var badge_id = $('#badge_id').val();
+                if (username && badge_id && username!='root') {
+                    var url = "/users/"+username+"/assign_badge/"+badge_id;
+                    $.post( url, function( data ) {
+                        var status = data.status || "Invalid response";
+                        $( "#result" ).html( status );
+                        setTimeout(function(){ $( "#result" ).html("")}, 5000);
+                    });
+                }
+            });
+        });
+    </script>
+
+{#    <h2>Edit Project Info</h2>#}
+{# TODO: Add Form and edit all project details #}
+{#    <textarea id="project_description">{{ project.description }}</textarea>#}
+{#    <input type="submit"/>#}
+{#    Ending Date#}
+
+    <hr/>
+
+    <h2>Assign a badge to a user:</h2>
+{# Add Form #}
+    <select id="badge_id">
+    {% for badge in badges %}
+        <option value="{{ badge.id }}">{{ badge.name }}</option>
+    {% endfor %}
+    </select>
+
+    <select id="username_to">
+    {% for user in all_users %}
+        <option value="{{ user.username }}">{{ user.username }}</option>
+    {% endfor %}
+    </select>
+    <input type="button" id="assign_badge_button" value="Create Badge"/> <span id="result"></span>
+    <br/>
+    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='/admin/badges/projectbadgetouser'">Edit badge assignments manually</button>
+    <button type="button" class="btn btn-primary btn-sm" onclick="location.href='/admin/badges/projectbadge/'">Edit badges</button>
+
+    <hr/>
+
+    <h2>Create a new user</h2>
+    Username (one word): <input type="text" id="username" value=""/>
+    <input id="create_user_button" type="button" value="Go to user creation page"/> (then push 'POST' on bottom to create)
+
+                {% if project.project_closing_date %}
+                <script src="{{ STATIC_URL }}js/TimeCircles/TimeCircles.js"></script>
+                <link rel="stylesheet" href="{{ STATIC_URL }}js/TimeCircles/TimeCircles.css">
+
+                <div style="font-size: 20px;font-weight: bold;">Project closes in: <div class="countdown_clock" data-date="{{ project.project_closing_date|date:"Y-m-d" }} {{ project.project_closing_date|time:"H:i:s" }}" style="height:100px"></div></div>
+                <script>$(document).ready(function(){$(".countdown_clock").TimeCircles();});</script>
+                {% endif %}
+
+    {%  else %}
+        <h2>Access Denied - You need admin access to this project</h2>
+        <h3><a href='/projects/{{ project.name }}/'>Return to {{ project.name|capfirst }}</a></h3>
+    {% endif %}
+
+{% endblock %}

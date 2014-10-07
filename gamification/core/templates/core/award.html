@@ -1,0 +1,34 @@
+{% extends 'core/base.html' %}
+
+{% block content %}
+<h1>Submit Award</h1>
+        <br/>
+<div class="row">
+    <div class="col-md-10">
+<form role="form" class="form-horizontal" action="" method="post" id="badge_award">
+    <fieldset>
+    {% csrf_token %}
+    {% for field in form %}
+        <div class="form-group">
+            <div class="row">
+                <div class="col-sm-offset-1 col-sm-10">
+                {{ field.label_tag }}
+                    </div>
+            </div>
+
+            <div class="col-sm-offset-1 col-sm-10">
+                {{ field }}
+            </div>
+        </div>
+    {% endfor %}
+    <div class="form-group">
+        <div class="col-sm-offset-2 col-sm-10">
+            <input type="submit" value="Submit" />
+        </div>
+    </div>
+
+    </fieldset>
+</form>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+{% load bootstrap3 %}
+{% load staticfiles %}
+{% load version %}
+
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{% block title %}Gamification{% endblock %}</title>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <script src="{{ STATIC_URL }}js/jquery.min.js"></script>
+    <script src="{{ STATIC_URL }}bootstrap/js/bootstrap.min.js"></script>
+    <script src="{{ STATIC_URL }}js/underscore-min.js"></script>
+    <script src="{{ STATIC_URL }}js/underscore.string.min.js"></script>
+    <script src="{{ STATIC_URL }}js/moment.min.js"></script>
+    <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}bootstrap/css/bootstrap-responsive.css">
+
+    <style>
+    body {
+        margin: 50px 50px 30px;
+    }
+    .page-header {
+        margin: 20px 0 0 0
+    }
+    </style>
+    <script>
+        $(document).ready(function(){
+            var url = document.location.pathname.split("/");
+            if (url && url.length && url.length>1){
+                url = url[1];
+
+                $('.navbar-nav li').each(function(){
+                    var $li = $(this);
+                    var this_tab = $li.text().trim().toLowerCase();
+                    $li.removeClass('active');
+                    if (url == this_tab){
+                        $li.addClass('active');
+                    }
+                });
+            }
+        })
+    </script>
+</head>
+<body>
+{% block container %}
+
+<div class="navbar navbar-fixed-top">
+
+    <div class="navbar-inner">
+        {% block menu %}
+            <div class="container-fluid">
+                <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </a>
+                <a class="brand" href="{%url 'home' %}">{% block brand %}Gamification{% endblock %}</a>
+                <div class="btn-group pull-right">
+                    <a class="btn dropdown-toggle" data-toggle="dropdown" href="#">
+                        <i class="icon-user"></i> {{request.user.username}}
+                        <span class="caret"></span>
+                    </a>
+                    <ul class="dropdown-menu">
+                        {% if request.user.is_authenticated %}
+                            {% if request.user.is_staff%}
+                                <li><a href="{% url 'admin:index' %}" target="_new">Admin Site</a></li>
+                                <li class="divider"></li>
+                            {% endif %}
+                                <li><a href="#">Edit Profile</a></li>
+                                <li><a href="/account/logout">Sign Out</a></li>
+                        {% else %}
+                                <li><a href="/account/login">Sign In</a></li>
+                        {% endif%}
+                        <li><a href="#">{% version_date %}</a></li>
+                    </ul>
+                </div>
+                <div class="nav-collapse">
+
+                    <ul class="nav navbar-nav">
+{#                        <li class="active">#}
+{#                            <a href="/users">Users</a>#}
+{#                        </li>#}
+                        <li class="active">
+                            <a href="/projects">Projects</a>
+                        </li>
+                        <li>
+                            <a href="/badges">Badges</a>
+                        </li>
+                    </ul>
+                </div><!--/.nav-collapse -->
+            </div>
+        {% endblock %}
+    </div>
+</div>
+
+{% block header_title %}
+{#<div class="page-header" id="top-banner">#}
+{#    <div class="row">#}
+{#        <div class="col-md-6 col-md-offset-1">#}
+{#            <img src="{% static 'img/title.png' %}" /><br/>#}
+{#            <p>Reward Your Users</p>#}
+{#        </div>#}
+{#    </div>#}
+{#</div>#}
+{% endblock %}
+
+{% block content %}Empty page{% endblock %}
+{% endblock %}
+</body>
+</html>

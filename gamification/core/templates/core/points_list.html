@@ -1,0 +1,77 @@
+{% extends 'core/base.html' %}
+{% block title %}Points for {{ username }}{% endblock %}
+
+{% block header_title %}
+    <div id="header_title">
+        <h2>Points for {{ username|capfirst }}</h2>
+    </div>
+{% endblock %}
+
+
+
+{% block content %}
+{% for project in profile %}
+        <div class="row" style="background: lightskyblue; border-radius: 6px; padding: 4px;">
+            <div class="col-md-4 col-md-offset-4">
+                <h3>{{ project.description }}</h3>
+            </div>
+        </div>
+        <div class="row"><br/></div>
+<div class="container">
+    <div class="row">
+        <div class="col-md-10 col-md-offset-1">
+            <table class="table table-bordered">
+                <thead>
+                <tr>
+                    <th>Award Name</th>
+                    <th>Points Received</th>
+                    <th>Date</th>
+                    <th>Comment</th>
+                </tr>
+                </thead>
+                <tbody>
+
+{% for badge in project.badges %}
+{% if badge.total %}
+                {% for award in badge.awarded %}
+                <tr>
+                    <td>
+                        {{ badge.name }}
+                    </td>
+                    <td>
+                        {{ award.value }}
+                    </td>
+                    <td>
+                        {{ award.date_awarded|date:"SHORT_DATE_FORMAT" }} at {{ award.date_awarded|time:"H:i" }}
+                    </td>
+                    <td>
+                        {{ award.description }}
+                    </td>
+                </tr>
+                {% endfor %}
+{#    <div class="row">#}
+{#        <div class="col-md-6 col-md-offset-1">#}
+{#            <h4>{{ badge.total }} {{ badge.name }} Points Accumulated</h4>#}
+{#        </div>#}
+{#    </div>#}
+{#    <hr/>#}
+{% endif %}
+{% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-2 col-md-offset-5">
+            <button type="button" class="btn btn-primary btn-sm" onclick="location.href='/users/{{ username }}/projects/{{ project.name }}/award'">Submit Award</button>
+        </div>
+    </div>
+</div>
+
+        <br/><br/>
+{% endfor %}
+{% endblock %}
+
+
+
