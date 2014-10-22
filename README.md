@@ -13,7 +13,7 @@ Software source code previously released under an open source license and then m
 ###In the News
 NGA Posts Gamification Software on GitHub, October 2014, [Government Computer News](http://gcn.com/blogs/pulse/2014/10/nga-gamification.aspx)
 
-NGA Releases Gamification Software Code on GitHub; Robert Cardillo Comments, October 2014, [ExecutiveGov]  (http://www.executivegov.com/2014/10/nga-releases-gamification-software-code-on-github-robert-cardillo-comments/)
+U.S. government releases open source gamification software, October 2014, [Gamasutra]  (http://www.gamasutra.com/view/news/228324/US_government_releases_open_source_gamification_software.php)
 
 ##Screenshots
 
