@@ -10,6 +10,9 @@ If you'd like to contribute to this project, please make a pull request. We'll r
 
 Software source code previously released under an open source license and then modified by NGA staff is considered a "joint work" (see 17 USC § 101); it is partially copyrighted, partially public domain, and as a whole is protected by the copyrights of the non-government authors and must be released according to the terms of the original open source license.
 
+###In the News
+NGA Releases Gamification Software Code on GitHub; Robert Cardillo Comments, October 2014, [ExecutiveGov]  (http://www.executivegov.com/2014/10/nga-releases-gamification-software-code-on-github-robert-cardillo-comments/)
+
 ##Screenshots
 
 ![List of active and inactive projects](https://cloud.githubusercontent.com/assets/147580/4509340/ad46fc92-4b1e-11e4-860c-8e6f4aa3faab.png)
