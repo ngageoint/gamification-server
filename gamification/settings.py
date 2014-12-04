@@ -180,6 +180,7 @@ INSTALLED_APPS = [
     "south",
     "rest_framework",
     "corsheaders",
+    "mptt",
     
     # project
     "gamification",

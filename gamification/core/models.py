@@ -31,6 +31,7 @@ from django.db.models.signals import post_save
 from django.db import models
 from gamification.badges.models import ProjectBadge, ProjectBadgeToUser
 from jsonfield import JSONField
+from mptt.models import MPTTModel, TreeForeignKey
 
 
 TRUE_FALSE = [(0, 'False'), (1, 'True')]
@@ -56,10 +57,11 @@ class ProjectBase(models.Model):
         ordering = ('-created_at',)
 
 
-class Team(models.Model):
+class Team(MPTTModel):
     name = models.CharField(max_length=50)
     description = models.TextField(null=True, blank=True)
     members = models.ManyToManyField(User, null=True, blank=True)
+    parent = TreeForeignKey('self', null=True, blank=True, related_name='children')
     order = models.IntegerField(default=0, null=True, blank=True, help_text='Optionally specify the order teams should appear. Lower numbers appear sooner. By default, teams appear in the order they were created.')
     date_created = models.DateTimeField(auto_now_add=True)
 
@@ -71,6 +73,9 @@ class Team(models.Model):
 
     class Meta:
         ordering = ['-order', '-date_created', 'id']
+
+    class MPTTMeta:
+        order_insertion_by = ['name']
 
 
 class Project(ProjectBase):
