@@ -22,7 +22,7 @@
                         <a href='{{ project.get_absolute_url }}'>{{ project.name|title }}</a>
                     </td>
                     <td>
-                        {{ project.description }}
+                        {{ project.description|linebreaks }}
                     </td>
                     <td>
                         {{ project.created_at|date:"SHORT_DATE_FORMAT" }}

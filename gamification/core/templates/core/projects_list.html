@@ -4,7 +4,7 @@
 {% block header_title %}
     <div id="header_title">
         <h1>{{ project.name|capfirst }}</h1>
-        <b>{{ project.description|capfirst|default:"Gamification Project" }}</b>
+        <b>{{ project.description|linebreaks|capfirst|default:"Gamification Project" }}</b>
     </div>
 {% endblock %}
 
@@ -64,7 +64,6 @@
     <script>
         var project_info = {};
         project_info.closing_date = '{{ project.project_closing_date|default:"" }}';
-        project_info.description = '{{ project.description|default:"" }}';
         project_info.name = '{{ project.name|default:"" }}';
         project_info.id = '{{ project.id }}';
         project_info.properties = {{ properties_json|safe }};
