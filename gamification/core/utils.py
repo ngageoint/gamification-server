@@ -109,6 +109,22 @@ def project_badge_awards(project):
 
     return sorted(items, key=lambda rec: rec[2],reverse=True)
 
+def project_team_points(project, team):
+    """
+    Given a particular project, return scores for each team
+    """
+
+    members = team.get_all_users()
+
+    score = 0
+    for member in members:
+        uscore = users_project_points(member, project)
+        if uscore:
+            score += uscore
+
+    return score
+
+
 def get_files_in_dir(mypath):
     from os import listdir
     from os.path import isfile, join

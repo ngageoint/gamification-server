@@ -39,9 +39,9 @@ from django.shortcuts import render, get_object_or_404
 import json
 from gamification.badges.utils import project_badge_count
 from gamification.core.utils import badge_count,top_n_badge_winners,user_project_badge_count, top_n_project_badge_winners,\
-project_badge_awards, users_project_points, get_files_in_dir
+project_badge_awards, users_project_points, get_files_in_dir, project_team_points
 
-from gamification.core.models import Project
+from gamification.core.models import Project,Team
 from gamification.core.forms import AwardForm
 from gamification.core.serializers import ProjectSerializer, PointsSerializer
 from rest_framework import renderers
@@ -118,6 +118,13 @@ class ProjectListView(ListView):
         context['badge_awards_json'] = json.dumps(context['badge_awards'])
         context['project'] = projects[0]
         context['properties_json'] = json.dumps(projects[0].properties or {})
+        nodes = Team.objects.all().order_by('tree_id','lft')
+
+        for team in nodes:
+            team.points = project_team_points(projects[0],team)
+
+        context['nodes'] = list(nodes)
+
 
         context['code'] = phrase
         if projects[0].visual_theme:

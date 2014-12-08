@@ -1,4 +1,5 @@
 {% extends 'core/base.html' %}
+{% load mptt_tags %}
 {% block title %}{{ project.name|capfirst }} - Gamification Server{% endblock %}
 
 {% block header_title %}
@@ -126,6 +127,7 @@
     </script>
 
     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li><a href="#team_board" data-toggle="tab">Team board</a></li>
         <li><a href="#leader_board" data-toggle="tab">Leader board</a></li>
         <li><a href="#badge_leaders" data-toggle="tab">Badge Leaders</a></li>
         <li><a href="#badge_list" data-toggle="tab">Badge List</a></li>
@@ -134,6 +136,35 @@
         {%  endif %}
     </ul>
     <div id="my-tab-content" class="tab-content">
+        <div class="tab-pane" id="team_board">
+            {# -- Team Board -- #}
+            <ul>
+            {% recursetree nodes %}
+            <li>
+                {{ node.name }} [{{ node.points }}]
+                <ul class="users" style="list-style-type: none;">
+                    {% for user in node.members.all %}
+                    <li>{{ user }}</li>
+                    {% endfor %}
+                </ul>
+                {% if not node.is_leaf_node %}
+                <ul class="children">
+                    {{ children }}
+                </ul>
+                {% endif %}
+            </li>
+            {% endrecursetree %}
+            </ul>
+            <!-- div id="team_board_table">
+                {% for team in badge_awards %}
+                <div class="row">
+                    <span style="width: 140px;"><b>{{ awardee|capfirst }}</b>
+                        {% if team %}[{{ team.name }}]{% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div -->
+        </div>
         <div class="tab-pane" id="leader_board">
 
             {# -- Leader Board -- #}

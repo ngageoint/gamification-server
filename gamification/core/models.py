@@ -71,6 +71,15 @@ class Team(MPTTModel):
     def __str__(self):
         return "%s (%s)" % (self.name, str(len(self.members.all())))
 
+    def get_all_users(self, include_self=True):
+        u = []
+        if include_self:
+            u += self.members.all()
+        for team in self.get_descendants():
+            u += team.members.all()
+
+        return u
+
     class Meta:
         ordering = ['-order', '-date_created', 'id']
 
