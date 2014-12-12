@@ -41,7 +41,7 @@ You can add the ``static/gamification-server-request.js`` file to any remote app
 <script>
     $(document).ready(function() {
         gamification.init({
-            server_url:"http://gamification-server.com/,
+            server_url:"http://gamification-server.com/",
             project_names:"my_app,overall_game",
             user_name: "{{ request.user.username }}",
             $badge_container: $('#badge-container')
