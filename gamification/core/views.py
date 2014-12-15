@@ -39,7 +39,7 @@ from django.shortcuts import render, get_object_or_404
 import json
 from gamification.badges.utils import project_badge_count
 from gamification.core.utils import badge_count,top_n_badge_winners,user_project_badge_count, top_n_project_badge_winners,\
-project_badge_awards, users_project_points, get_files_in_dir, project_team_points
+project_badge_awards, users_project_points, get_files_in_dir, project_team_points, team_project_member_points
 
 from gamification.core.models import Project,Team
 from gamification.core.forms import AwardForm
@@ -122,6 +122,7 @@ class ProjectListView(ListView):
 
         for team in nodes:
             team.points = project_team_points(projects[0],team)
+            team.memberpoints = team_project_member_points(team,projects[0])
 
         context['nodes'] = list(nodes)
 
