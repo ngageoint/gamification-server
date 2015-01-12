@@ -1,4 +1,6 @@
 {% extends 'core/base.html' %}
+{% load mptt_tags %}
+{% load teams %}
 {% block title %}{{ project.name|capfirst }} - Gamification Server{% endblock %}
 
 {% block header_title %}
@@ -49,6 +51,9 @@
     {% for file in theme_files_css %}
     <link rel="stylesheet" href="{{ STATIC_URL }}themes/{{ project.visual_theme }}/{{ file }}">
     {% endfor %}
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/ui.fancytree.css">
+    <script src="{{ STATIC_URL }}js/jquery-ui.custom.js"></script>
+    <script src="{{ STATIC_URL }}js/jquery.fancytree.js"></script>
 
     <style>
         {%  if project.background_image %}
@@ -70,6 +75,7 @@
         {% autoescape off %}
         project_info.badge_json = {{ badge_awards_json|default:"''" }};
         project_info.theme_files = {{ theme_files|safe|default:"''" }};
+        project_info.team_members = {{ nodes|teamify }};
         {% endautoescape %}
 
         $(document).ready(function(){
@@ -81,6 +87,24 @@
                     var newtime = time.calendar();
                     $item.text('Awarded '+newtime);
                 }
+            });
+
+            // add members to the teams displayed in team board
+            _.each($("#tree li"), function(team_node) {
+                var teamid = team_node.id;
+                if (project_info.team_members[teamid].length > 0) {
+                    // add members to <ul> of that list if it exists, or create one if it doesn't
+                    var ul_node = $("#"+teamid + " ul");
+                    if (! ul_node.length) {
+                        $("#" + teamid).append("<ul>");
+                    }
+
+                    _.each(project_info.team_members[teamid], function (member) {
+                        ul_node = $("#"+teamid + " ul");
+                        ul_node.prepend("<li>" + member['name'] + " [" + member['points'] + "]</li>");
+                    });
+                }
+
             });
 
             {% if project.project_closing_date %}
@@ -125,7 +149,16 @@
         });
     </script>
 
+    <script>
+        $(function(){
+            // using default options
+            $("#tree").fancytree();
+        });
+
+    </script>
+
     <ul id="tabs" class="nav nav-tabs" data-tabs="tabs">
+        <li><a href="#team_board" data-toggle="tab">Team board</a></li>
         <li><a href="#leader_board" data-toggle="tab">Leader board</a></li>
         <li><a href="#badge_leaders" data-toggle="tab">Badge Leaders</a></li>
         <li><a href="#badge_list" data-toggle="tab">Badge List</a></li>
@@ -134,6 +167,28 @@
         {%  endif %}
     </ul>
     <div id="my-tab-content" class="tab-content">
+        <div class="tab-pane" id="team_board">
+            <div id="tree">
+            {# -- Team Board -- #}
+            {% for team,structure in nodes|tree_info %}
+                {% if structure.new_level %}<ul>{% else %}</li>{% endif %}
+                <li class="folder expanded" id="{{ team.name|slugify }}">
+
+                {{ team.name }} [{{ team.points }}]
+
+                {% for team.level in structure.closed_levels %}</li></ul>{% endfor %}
+            {% endfor %}
+            </div>
+            <!-- div id="team_board_table">
+                {% for team in badge_awards %}
+                <div class="row">
+                    <span style="width: 140px;"><b>{{ awardee|capfirst }}</b>
+                        {% if team %}[{{ team.name }}]{% endif %}
+                    </span>
+                </div>
+                {% endfor %}
+            </div -->
+        </div>
         <div class="tab-pane" id="leader_board">
 
             {# -- Leader Board -- #}

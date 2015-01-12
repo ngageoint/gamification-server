@@ -1,10 +1,7 @@
 /*
     DJANGO Admin styles
 */
-select[multiple="multiple"] {
-    height: 200px;
-    width: 150px;
-}
+
 body {
     margin: 0;
     padding: 0;
@@ -839,3 +836,4 @@ table#change-history tbody th {
     background: #eee url(../img/nav-bg.gif) bottom left repeat-x;
     color: #666;
 }
+

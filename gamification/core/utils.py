@@ -109,6 +109,22 @@ def project_badge_awards(project):
 
     return sorted(items, key=lambda rec: rec[2],reverse=True)
 
+def project_team_points(project, team):
+    """
+    Given a particular project, return scores for each team
+    """
+
+    members = team.get_all_users()
+
+    score = 0
+    for member in members:
+        uscore = users_project_points(member, project)
+        if uscore:
+            score += uscore
+
+    return score
+
+
 def get_files_in_dir(mypath):
     from os import listdir
     from os.path import isfile, join
@@ -156,14 +172,14 @@ def users_project_points(user,project):
     Find out a user's total points won on project, factoring in weighted values of badges
     """
     total = ProjectBadge.objects.filter(user=user,project=project).aggregate(models.Sum('awardLevel'))
-    return total['awardLevel__sum']
+    return total['awardLevel__sum'] if total['awardLevel__sum'] is not None else 0
 
 def users_total_points(user):
     """
     Find out a user's points from all projects
     """
     total = ProjectBadge.objects.filter(user=user).aggregate(models.Sum('awardLevel'))
-    return total['awardLevel__sum']
+    return total['awardLevel__sum'] if total['awardLevel__sum'] is not None else 0
 
 def user_project_badge_count(user,project):
     """
@@ -192,3 +208,16 @@ def user_project_badge_count(user,project):
         badge['total'] = total['value__sum']
 
     return badges
+
+def team_project_member_points(team,project):
+    d = dict()
+    d['name'] = team.name
+    d['points'] = 0
+    d['members'] = []
+
+    for member in team.members.all():
+        info = {'name':str(member.username), 'points': users_project_points(member,project) }
+        d['points'] += info['points']
+        d['members'].append(info)
+
+    return d
