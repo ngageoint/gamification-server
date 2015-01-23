@@ -21,7 +21,6 @@ django-stronghold==0.2.2
 django-tastypie==0.11.0
 django-user-accounts==1.0b13
 eventlog==0.6.2
-#gamification==0.0.0.1
 jsonfield==0.9.17
 metron==1.1
 pinax-theme-bootstrap==3.0a9
