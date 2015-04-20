@@ -92,3 +92,4 @@ The ``gamification/settings.py`` file contains installation-specific settings. T
 
         % python manage.py runserver
 
+
