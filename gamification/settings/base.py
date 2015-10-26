@@ -27,9 +27,15 @@
 import os
 
 
-PROJECT_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
-PACKAGE_ROOT = os.path.abspath(os.path.dirname(__file__))
-SITE_ROOT = os.path.dirname(os.path.realpath(__file__))
+PROJECT_ROOT = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), os.pardir, os.pardir
+))
+
+PACKAGE_ROOT = os.path.abspath(os.path.join(
+    os.path.dirname(__file__), os.pardir
+))
+
+SITE_ROOT = os.path.abspath(os.path.join(os.path.dirname(__file__), os.pardir))
 
 DEBUG = True
 TEMPLATE_DEBUG = DEBUG
@@ -39,17 +45,6 @@ ADMINS = [
 ]
 
 MANAGERS = ADMINS
-
-DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.postgresql_psycopg2",
-        "NAME": "gamification",
-        "USER": "game_manager",
-        "PASSWORD": "django-gamification",
-        "HOST": "",
-        "PORT": "5432"
-    }
-}
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
@@ -79,7 +74,7 @@ USE_TZ = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-#MEDIA_ROOT = os.path.join(PACKAGE_ROOT, "site_media", "media")
+# MEDIA_ROOT = os.path.join(PACKAGE_ROOT, "site_media", "media")
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
@@ -90,7 +85,7 @@ USE_TZ = True
 # Don"t put anything in this directory yourself; store your static files
 # in apps" "static/" subdirectories and in STATICFILES_DIRS.
 # Example: "/home/media/media.lawrence.com/static/"
-#STATIC_ROOT = '{0}'.format('/var/www/static')
+# STATIC_ROOT = '{0}'.format('/var/www/static')
 STATIC_ROOT = os.path.join(PACKAGE_ROOT, "static")
 MEDIA_ROOT = os.path.join(PROJECT_ROOT, "gamification/site_media")
 
@@ -99,9 +94,9 @@ MEDIA_ROOT = os.path.join(PROJECT_ROOT, "gamification/site_media")
 STATIC_URL = "/static/"
 
 # Additional locations of static files
-#STATICFILES_DIRS = [
+# STATICFILES_DIRS = [
 #    os.path.join(PACKAGE_ROOT, "static"),
-#]
+# ]
 
 # List of finder classes that know how to find static files in
 # various locations.
@@ -167,11 +162,11 @@ INSTALLED_APPS = [
     "django.contrib.sites",
     "django.contrib.messages",
     "django.contrib.staticfiles",
-    
+
     # theme
     "pinax_theme_bootstrap",
     "django_forms_bootstrap",
-    
+
     # external
     "account",
     "metron",
@@ -181,7 +176,7 @@ INSTALLED_APPS = [
     "rest_framework",
     "corsheaders",
     "mptt",
-    
+
     # project
     "gamification",
     "gamification.badges",
@@ -236,9 +231,6 @@ ACCOUNT_EMAIL_CONFIRMATION_EXPIRE_DAYS = 2
 AUTHENTICATION_BACKENDS = [
     "account.auth_backends.UsernameAuthenticationBackend",
 ]
-
-CORS_ORIGIN_WHITELIST = ( '192.168.5.131:8000', 'localhost:8000', )
-CORS_ALLOW_METHODS = ( 'GET', 'POST', 'OPTIONS' )
 
 CACHES = {
     'default': {

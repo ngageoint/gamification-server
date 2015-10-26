@@ -3,7 +3,7 @@
 import os, sys
 
 if __name__ == "__main__":
-    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gamification.settings")
+    os.environ.setdefault("DJANGO_SETTINGS_MODULE", "gamification.settings.default")
     os.environ['PGCONNECT_TIMEOUT'] = '30'
 
     manage_dir = os.path.dirname(os.path.realpath(__file__))
