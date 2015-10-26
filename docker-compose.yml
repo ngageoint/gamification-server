@@ -1,0 +1,18 @@
+web:
+  build: docker/web
+  hostname: web
+  volumes:
+    - .:/server
+  ports:
+    - "8000:8000"
+  links:
+    - db
+  environment:
+      - DJANGO_SETTINGS_MODULE=gamification.settings.docker
+db:
+  image: postgres:9.4
+  hostname: db
+  environment:
+    - POSTGRES_PASSWORD=postgres
+  ports:
+    - "5432:5432"

@@ -92,4 +92,13 @@ The ``gamification/settings.py`` file contains installation-specific settings. T
 
         % python manage.py runserver
 
+###Using the Docker container
 
+1. You need to install [Docker](https://www.docker.com/) &
+   [composer](https://docs.docker.com/compose/):
+
+2. Spawn the containers:
+
+        % docker-compose up
+
+3. Enjoy!
